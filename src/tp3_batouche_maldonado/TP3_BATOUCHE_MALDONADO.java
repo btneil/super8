@@ -19,7 +19,7 @@ public class TP3_BATOUCHE_MALDONADO {
         partie.attribuerCouleursAuxJoueurs();
         partie.initialiserPartie();
         System.out.println("la partie va commencer");
-        
+        partie.debuterPartie();
     }
     
 }
