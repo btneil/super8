@@ -24,7 +24,7 @@ public class Partie {
             ListeJoueurs[0].couleur="jaune";//couleur des jetons du joueur 1
         }
     public void initialiserPartie(){
-        Grille GrilleJeu = null;
+        Grille GrilleJeu=new Grille();
         GrilleJeu.viderGrille();
         Random rand = new Random(); 
         int max= 25;
@@ -37,8 +37,8 @@ public class Partie {
             GrilleJeu.placerTrouNoir(i,j);//placement du trou noir a une place aleatoire dans la grille
             GrilleJeu.placerDesintegrateur(k,l);//placement du desintegrateur a une place aleatoire dans la grille
         }
-        Jeton jetonJ1 = null;
-        Jeton jetonJ2 = null;
+        Jeton jetonJ1=new Jeton(String "cJ1");
+        Jeton jetonJ2=new Jeton(String "cJ2");
         jetonJ1.couleur=ListeJoueurs[0].couleur;//attribut couleur jeton joueur 1
         jetonJ2.couleur=ListeJoueurs[1].couleur;//attribut couleur jeton joueur 2
         ListeJoueurs[0].ajouterJeton(jetonJ1);//ajout des jetons au joueur 1
