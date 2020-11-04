@@ -46,9 +46,6 @@ public class Partie {
         
 }
     public void debuterPartie() {
-        Partie partie = null;
-        partie.attribuerCouleursAuxJoueurs();
-        partie.initialiserPartie();
-        System.out.println("la partie va commencer");
+        //a venir
     }
 }
