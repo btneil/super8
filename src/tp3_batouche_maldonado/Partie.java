@@ -12,11 +12,11 @@ import java.util.Random;
  * @author maldo
  */
 public class Partie {
-    Joueur[] ListeJoueurs = new Joueur[1];//creation nouveau joueur
+    Joueur[] ListeJoueurs = new Joueur[2];//creation nouveau joueur
     Joueur joueurCourant;
-    public Partie() {
-        ListeJoueurs=null;
-        joueurCourant=null;
+    public Partie(Joueur J1, Joueur J2) {
+        ListeJoueurs[0]=J1;
+        ListeJoueurs[1]=J2;
     }
     
     public void attribuerCouleursAuxJoueurs(){
@@ -37,8 +37,8 @@ public class Partie {
             GrilleJeu.placerTrouNoir(i,j);//placement du trou noir a une place aleatoire dans la grille
             GrilleJeu.placerDesintegrateur(k,l);//placement du desintegrateur a une place aleatoire dans la grille
         }
-        Jeton jetonJ1=new Jeton(String "cJ1");
-        Jeton jetonJ2=new Jeton(String "cJ2");
+        Jeton jetonJ1=new Jeton("cj1");
+        Jeton jetonJ2=new Jeton("cj2");
         jetonJ1.couleur=ListeJoueurs[0].couleur;//attribut couleur jeton joueur 1
         jetonJ2.couleur=ListeJoueurs[1].couleur;//attribut couleur jeton joueur 2
         ListeJoueurs[0].ajouterJeton(jetonJ1);//ajout des jetons au joueur 1
