@@ -12,11 +12,11 @@ package tp3_batouche_maldonado;
 public class Grille {
 
     Cellule[][] Grille = new Cellule[6][7]; // Cellules est un tableau 2D de type Grille
-
+    // la cellule Grille[0][0] est située en haut à gauche ici.
     public Grille() {
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j <= 6; j++) {
-                Grille[i][j] = null;
+                Grille[i][j] = new Cellule();
 
             }
         }
@@ -143,11 +143,11 @@ public class Grille {
 
     }
 
-    public void tasserGrille(int liberee) { // liberee : la ligne qui vient d'etre libere
-        for (int j=6;j>=0;j--){
+    public void tasserGrille(int liberee) { // liberee : la colonne ou le jeton a été supprimé
+        for (int i=5;i>=1;i--){
             
-            if (Grille[liberee][j]==null){
-                Grille[liberee][j]=Grille[liberee+1][j];
+            if (Grille[i][liberee].jetonCourant==null){
+                Grille[i][liberee].jetonCourant=Grille[i+1][liberee].jetonCourant;
             }
         }
         

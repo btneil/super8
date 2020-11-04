@@ -13,7 +13,6 @@ public class Jeton {
     String couleur; 
 
     public Jeton(String couleurJeton) {
-        couleurJeton="0";
         couleur=couleurJeton;
     }
     public String lireCouleur(){
