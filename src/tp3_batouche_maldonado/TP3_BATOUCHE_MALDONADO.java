@@ -14,12 +14,12 @@ public class TP3_BATOUCHE_MALDONADO {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        Partie partie = null;
-        partie.attribuerCouleursAuxJoueurs();
-        partie.initialiserPartie();
+    public static void main(String[] args) {;
+        Partie Newpartie = new Partie();
+        Newpartie.attribuerCouleursAuxJoueurs();
+        Newpartie.initialiserPartie();
         System.out.println("la partie va commencer");
-        partie.debuterPartie();
+        Newpartie.debuterPartie();
     }
     
 }
