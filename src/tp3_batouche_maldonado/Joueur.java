@@ -10,7 +10,7 @@ package tp3_batouche_maldonado;
  *
  * @author neilb
  */
-public class Joueur {
+public class Joueur {//
     String nom;
     String couleur;
     Jeton [] ListeJetons= new Jeton[21];

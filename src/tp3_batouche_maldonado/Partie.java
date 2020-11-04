@@ -6,6 +6,7 @@
 package tp3_batouche_maldonado;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.util.Random;
 public class Partie {
     Joueur[] ListeJoueurs = new Joueur[2];//creation nouveau joueur
     Joueur joueurCourant;
+    Grille GrilleJeu=new Grille();
     public Partie(Joueur J1, Joueur J2) {
         ListeJoueurs[0]=J1;
         ListeJoueurs[1]=J2;
@@ -27,13 +29,14 @@ public class Partie {
         Grille GrilleJeu=new Grille();
         GrilleJeu.viderGrille();
         Random rand = new Random(); 
-        int max= 25;
-        int a = rand.nextInt(max);//nombre aleatoire de desintegrateur et trou noir a placer
+        int max1= 5;//maximum de ligne possible + maximum de trou/desintegrateur
+        int max2= 6;//maximum colonne
+        int a = rand.nextInt(max1);//nombre aleatoire de desintegrateur et trou noir a placer
         for (int b = 0 ; b <= a ; b++) {
-            int i = rand.nextInt(max);
-            int j = rand.nextInt(max);
-            int k = rand.nextInt(max);
-            int l = rand.nextInt(max);
+            int i = rand.nextInt(max1);
+            int j = rand.nextInt(max2);
+            int k = rand.nextInt(max1);
+            int l = rand.nextInt(max2);
             GrilleJeu.placerTrouNoir(i,j);//placement du trou noir a une place aleatoire dans la grille
             GrilleJeu.placerDesintegrateur(k,l);//placement du desintegrateur a une place aleatoire dans la grille
         }
@@ -46,6 +49,11 @@ public class Partie {
         
 }
     public void debuterPartie() {
-        //a venir
-    }
+        initialiserPartie();
+        attribuerCouleursAuxJoueurs();
+        System.out.println("la partie va commencer");
+        while (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[0])==false && GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[1])==false) {
+        
+        }
+}
 }
