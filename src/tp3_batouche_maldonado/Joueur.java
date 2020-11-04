@@ -15,7 +15,7 @@ public class Joueur {
     String couleur;
     Jeton [] ListeJetons= new Jeton[21];
     int nombreDesintegrateurs;
-    int nombreJetonsRestant; // nombre	 de	 jetons	 restant	 en	 possession	 du	 joueur, correspondant	à	la	taille	effective	de	ListeJetons
+    int nombreJetonsRestant; // nombre de jeton restant	 en possession	 du	 joueur, correspondant	à	la	taille	effective	de	ListeJetons
     
     public Joueur(String name){ // constructeur
         nom=name;
@@ -27,7 +27,7 @@ public class Joueur {
     
     public void ajouterJeton(Jeton jeton){
         for (int i=0;i<ListeJetons.length;i++){
-            ListeJetons[i]=jeton;
+            ListeJetons[i]=jeton;//
             
         }
     }
