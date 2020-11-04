@@ -5,6 +5,8 @@
  */
 package tp3_batouche_maldonado;
 
+import java.util.Scanner;
+
 /**
  *
  * @author neilb
@@ -15,7 +17,16 @@ public class TP3_BATOUCHE_MALDONADO {
      * @param args the command line arguments
      */
     public static void main(String[] args) {;
-        Partie Newpartie = new Partie();
+        Scanner sc;
+        sc = new Scanner(System.in);
+        System.out.println("Saisir nom joueur 1");
+        String nom1 = sc.next();
+        Joueur J1 = new Joueur(nom1);
+        System.out.println("Saisir nom joueur 2");
+        String nom2=sc.next();
+        Joueur J2 = new Joueur(nom2);
+                
+        Partie Newpartie = new Partie(J1,J2);
         Newpartie.attribuerCouleursAuxJoueurs();
         Newpartie.initialiserPartie();
         System.out.println("la partie va commencer");
