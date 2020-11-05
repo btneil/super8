@@ -22,8 +22,8 @@ public class Partie {
     }
     
     public void attribuerCouleursAuxJoueurs(){
-            ListeJoueurs[1].couleur="rouge";//couleur des jetons du joueur 2
-            ListeJoueurs[0].couleur="jaune";//couleur des jetons du joueur 1
+            ListeJoueurs[1].couleur="R";//couleur des jetons du joueur 2
+            ListeJoueurs[0].couleur="J";//couleur des jetons du joueur 1
         }
     public void initialiserPartie(){
         Grille GrilleJeu=new Grille();
@@ -33,8 +33,8 @@ public class Partie {
         int max2= 6;//maximum colonne
         int a = rand.nextInt(max1);//nombre aleatoire de desintegrateur et trou noir a placer
         for (int b = 0 ; b <= a ; b++) {
-            int i = rand.nextInt(max1);
-            int j = rand.nextInt(max2);
+            int i = rand.nextInt(max1); // i comme k sont des indices de lignes, compris entre 0 et 5 
+            int j = rand.nextInt(max2); // j comme l sont des indices de colonnes, compris entre 0 et 6
             int k = rand.nextInt(max1);
             int l = rand.nextInt(max2);
             GrilleJeu.placerTrouNoir(i,j);//placement du trou noir a une place aleatoire dans la grille
@@ -52,7 +52,8 @@ public class Partie {
         initialiserPartie();
         attribuerCouleursAuxJoueurs();
         System.out.println("la partie va commencer");
-        while (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[0])==false && GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[1])==false) {
+        while (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[0])==false && GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[1])==false && GrilleJeu.etreRemplie()==false) {
+            
         
         }
 }
