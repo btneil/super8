@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Partie {
     Joueur[] ListeJoueurs = new Joueur[2];//creation nouveau joueur
-    Joueur joueurCourant;
+    Joueur joueurCourant= ListeJoueurs[1];
     Grille GrilleJeu=new Grille();
     public Partie(Joueur J1, Joueur J2) {
         ListeJoueurs[0]=J1;
@@ -40,21 +40,48 @@ public class Partie {
             GrilleJeu.placerTrouNoir(i,j);//placement du trou noir a une place aleatoire dans la grille
             GrilleJeu.placerDesintegrateur(k,l);//placement du desintegrateur a une place aleatoire dans la grille
         }
+ 
         Jeton jetonJ1=new Jeton("cj1");
         Jeton jetonJ2=new Jeton("cj2");
         jetonJ1.couleur=ListeJoueurs[0].couleur;//attribut couleur jeton joueur 1
         jetonJ2.couleur=ListeJoueurs[1].couleur;//attribut couleur jeton joueur 2
         ListeJoueurs[0].ajouterJeton(jetonJ1);//ajout des jetons au joueur 1
+        ListeJoueurs[0].nombreJetonsRestant=21;
         ListeJoueurs[1].ajouterJeton(jetonJ2);//ajout des jetons au joueur 2
+        ListeJoueurs[1].nombreJetonsRestant=21;
+        
         
 }
     public void debuterPartie() {
+        Scanner sc= new Scanner (System.in);        
         initialiserPartie();
         attribuerCouleursAuxJoueurs();
         System.out.println("la partie va commencer");
         while (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[0])==false && GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[1])==false && GrilleJeu.etreRemplie()==false) {
+            GrilleJeu.afficherGrilleSurConsole();
+            if (joueurCourant==ListeJoueurs[1]){ // a chaque tour de jeu, joueurCourant change et permet de jouer chacun son tour
+                joueurCourant=ListeJoueurs[0];
+            }
+            else {
+                joueurCourant=ListeJoueurs[1];
+            }
+           
+            
+            boolean i=true; // permet de ne laisser jouer qu'une seule fois chaque joueur.
+            while (joueurCourant.nombreJetonsRestant!=0 && i==true ){
+                System.out.println("c'est au tour de : "+joueurCourant.nom);
+                System.out.println("Saisissez la colonne où mettre le jeton : ");
+                int col=sc.nextInt();
+                
+                if (col>=0 &&col<=6 && GrilleJeu.colonneRemplie()==false){ // test de la saisie et de la colonne
+                    GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col);
+                    joueurCourant.nombreJetonsRestant-=1;
+                }
+                i=false;
+            }
             
         
         }
+        System.out.println("test");
 }
 }

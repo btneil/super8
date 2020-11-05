@@ -74,8 +74,9 @@ public class Cellule {
             return(false);
         }
     }
-    public String lireCouleurDuJeton(){
-        return(jetonCourant.lireCouleur());
+    public String lireCouleurDuJeton() {
+        return (jetonCourant.lireCouleur());
+
     }
     public boolean recupererDesintegrateurs(){
         if (desintegrateur == true){
