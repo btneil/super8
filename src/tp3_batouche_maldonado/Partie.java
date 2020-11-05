@@ -41,8 +41,8 @@ public class Partie {
             GrilleJeu.placerDesintegrateur(k,l);//placement du desintegrateur a une place aleatoire dans la grille
         }
  
-        Jeton jetonJ1=new Jeton("cj1");
-        Jeton jetonJ2=new Jeton("cj2");
+        Jeton jetonJ1=new Jeton(ListeJoueurs[0].couleur);
+        Jeton jetonJ2=new Jeton(ListeJoueurs[1].couleur);
         jetonJ1.couleur=ListeJoueurs[0].couleur;//attribut couleur jeton joueur 1
         jetonJ2.couleur=ListeJoueurs[1].couleur;//attribut couleur jeton joueur 2
         ListeJoueurs[0].ajouterJeton(jetonJ1);//ajout des jetons au joueur 1
@@ -73,9 +73,12 @@ public class Partie {
                 System.out.println("Saisissez la colonne où mettre le jeton : ");
                 int col=sc.nextInt();
                 
-                if (col>=0 &&col<=6 && GrilleJeu.colonneRemplie()==false){ // test de la saisie et de la colonne
+                if (col>=0 && col<=6 && GrilleJeu.colonneRemplie(col)==false){ // test de la saisie et de la colonne
                     GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col);
                     joueurCourant.nombreJetonsRestant-=1;
+                }
+                else if (col<0 || col>6){
+                    System.out.println("erreur saisie : au joueur suivant !");
                 }
                 i=false;
             }

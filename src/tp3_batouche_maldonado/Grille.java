@@ -25,6 +25,22 @@ public class Grille {
     }
 
     public boolean ajouterJetonDansColonne(Jeton jetonot, int col) {
+        // On parcourt chaque ligne et TANT QUE le jetonCourant de la Grille[i][col]!=null, on fait quelque chose.. mais quoi ? 
+        // methode a refaire 
+        for (int i=5;i>=0;i--){
+            if (Grille[i][col].recupererJeton()==null){
+                return Grille[i][col].affecterJeton(jetonot);
+            }
+            else if (Grille[i][col].recupererJeton()!=null){
+                return false;
+                
+            }
+            
+                
+            
+        }
+        return false;
+        /*
         int i = 5;
         while (i >= 0) {
             if (Grille[i][col].recupererJeton() == null) {
@@ -33,7 +49,7 @@ public class Grille {
             }
 
         }
-        return false;
+        return false;*/
     }
 
     public boolean etreRemplie() {
@@ -63,15 +79,15 @@ public class Grille {
             for (int j = 0; j < 6; j++) {
                 if (Grille[i][j].presenceTrouNoir() == false) {
                     if (Grille[i][j].jetonCourant!=null){
-                    System.out.print(Grille[i][j].lireCouleurDuJeton());
+                    System.out.print(Grille[i][j].lireCouleurDuJeton()+"test affi");
                     }
                     else {
                     System.out.print(" ");
                     }
                 }
                 
-                if (Grille[i][j].presenceTrouNoir() == true) {
-                    System.out.print("T");
+                else {
+                    System.out.print("T"); // presence des trous noir comme condition à l'affichage
 
                 }
             }
@@ -172,9 +188,27 @@ public class Grille {
 
     }
 
-    public boolean colonneRemplie() {
+    public boolean colonneRemplie(int col) {
+        // on cherche a regarder si pour la ligne la plus elevée du jeu (ici i=0), les colonnes j de 0 à 6 inclus sont remplis donc : 
+        int i=0;
+        if (celluleOccupee(i,col)==true){
+            return true;
+        }else{
+            return false;
+        }
+        /*
+        for (int j = 0; j<=6;j++) {
+            if (celluleOccupee(0,j)==true) {
+                return true;
 
-        for (int i = 0; i <= 5; i++) {
+
+            }
+
+        }
+        return false;
+        
+        
+        /*for (int i = 0; i <= 5; i++) {
             for (int j = 0; j <= 6; j++) {
                 if (Grille[i][j] != null) {
                     return false; // s'arrete des qu'une cellule n'est pas vide
@@ -182,7 +216,7 @@ public class Grille {
                 }
             }
         }
-        return true;
+        return true;*/
     }
 
     public boolean placerTrouNoir(int i, int j) {

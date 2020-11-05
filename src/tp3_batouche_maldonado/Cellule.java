@@ -41,21 +41,21 @@ public class Cellule {
         }
     }
     public boolean placerTrouNoir(){
-        if (trouNoir != true) {
+        if (trouNoir == false) {
             trouNoir=true;
-            return(true);
+            return true;
         }
         else {
-            return(false);
+            return true;
         }
     }
     public boolean placerDesintegrateur(){
-        if (desintegrateur!=true) {
+        if (desintegrateur==false) {
             desintegrateur =true;
             return(true);
         }
         else {
-            return(false);
+            return(true);
         }
     }
     public boolean presenceTrouNoir(){
