@@ -25,31 +25,21 @@ public class Grille {
     }
 
     public boolean ajouterJetonDansColonne(Jeton jetonot, int col) {
-        // On parcourt chaque ligne et TANT QUE le jetonCourant de la Grille[i][col]!=null, on fait quelque chose.. mais quoi ? 
-        // methode a refaire 
-        for (int i=5;i>=0;i--){
-            if (Grille[i][col].recupererJeton()==null){
-                return Grille[i][col].affecterJeton(jetonot);
-            }
-            else if (Grille[i][col].recupererJeton()!=null){
-                return false;
-                
+        int i = 5;
+
+        while (i>=0 ) {
+            if (Grille[i][col].jetonCourant==null && Grille[i][col].trouNoir==false){
+                Grille[i][col].affecterJeton(jetonot);
+                return true;
             }
             
-                
+                i--;
             
         }
         return false;
-        /*
-        int i = 5;
-        while (i >= 0) {
-            if (Grille[i][col].recupererJeton() == null) {
-                Grille[i][col].affecterJeton(jetonot);
-                i--;
-            }
+        
 
-        }
-        return false;*/
+
     }
 
     public boolean etreRemplie() {
