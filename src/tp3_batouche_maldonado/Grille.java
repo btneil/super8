@@ -28,12 +28,12 @@ public class Grille {
         int i = 5;
 
         while (i>=0 ) {
-            if (Grille[i][col].jetonCourant==null && Grille[i][col].trouNoir==false){
+            if (Grille[i][col].jetonCourant==null && Grille[i][col].trouNoir==false){ // S'il n'y a pas de trou noir et que le jetonCourant de la cellule est null, on peut ajouter un jeton
                 Grille[i][col].affecterJeton(jetonot);
                 return true;
             }
             
-                i--;
+            i--;
             
         }
         return false;
@@ -180,33 +180,13 @@ public class Grille {
 
     public boolean colonneRemplie(int col) {
         // on cherche a regarder si pour la ligne la plus elevée du jeu (ici i=0), les colonnes j de 0 à 6 inclus sont remplis donc : 
-        int i=0;
-        if (celluleOccupee(i,col)==true){
-            return true;
-        }else{
+        int i=0; // la ligne tout au dessus doit être vide pour que la colonne puisse accepter un nouveau jeton.
+        if (Grille[i][col].jetonCourant==null){
             return false;
+        }else{
+            return true;
         }
-        /*
-        for (int j = 0; j<=6;j++) {
-            if (celluleOccupee(0,j)==true) {
-                return true;
-
-
-            }
-
-        }
-        return false;
         
-        
-        /*for (int i = 0; i <= 5; i++) {
-            for (int j = 0; j <= 6; j++) {
-                if (Grille[i][j] != null) {
-                    return false; // s'arrete des qu'une cellule n'est pas vide
-
-                }
-            }
-        }
-        return true;*/
     }
 
     public boolean placerTrouNoir(int i, int j) {
