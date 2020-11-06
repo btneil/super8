@@ -65,14 +65,15 @@ public class Grille {
 
     public void afficherGrilleSurConsole() {
        
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 6; j++) {
+        for (int i = 0; i <= 5; i++) {
+            for (int j = 0; j <= 6; j++) {
                 if (Grille[i][j].presenceTrouNoir() == false) {
                     if (Grille[i][j].jetonCourant!=null){
-                    System.out.print(Grille[i][j].lireCouleurDuJeton()+"test affi");
+                        
+                        System.out.print(Grille[i][j].lireCouleurDuJeton());
                     }
                     else {
-                    System.out.print(" ");
+                        System.out.print(" ");
                     }
                 }
                 
@@ -147,7 +148,7 @@ public class Grille {
     }
 
     public boolean GagnanteDiagDesc(Joueur joueur) {
-        for (int i = 0; i <= 2; i--) {
+        for (int i = 0; i <= 2; i++) {
             for (int j = 0; j <= 3; j++) {
                 if (Grille[i][j].jetonCourant != null && Grille[i + 1][j + 1].jetonCourant != null && Grille[i + 2][j + 2].jetonCourant != null && Grille[i+3][j + 3].jetonCourant != null) {
                     if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i + 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i + 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {

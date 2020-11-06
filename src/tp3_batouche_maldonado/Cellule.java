@@ -46,7 +46,7 @@ public class Cellule {
             return true;
         }
         else {
-            return true;
+            return false;
         }
     }
     public boolean placerDesintegrateur(){
@@ -55,7 +55,7 @@ public class Cellule {
             return(true);
         }
         else {
-            return(true);
+            return(false);
         }
     }
     public boolean presenceTrouNoir(){

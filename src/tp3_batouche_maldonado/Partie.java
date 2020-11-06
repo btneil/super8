@@ -22,36 +22,53 @@ public class Partie {
     }
     
     public void attribuerCouleursAuxJoueurs(){
-            ListeJoueurs[1].couleur="R";//couleur des jetons du joueur 2
-            ListeJoueurs[0].couleur="J";//couleur des jetons du joueur 1
+            ListeJoueurs[0].couleur="R";//couleur des jetons du joueur 1
+            ListeJoueurs[1].couleur="J";//couleur des jetons du joueur 2
         }
-    public void initialiserPartie(){
-        Grille GrilleJeu=new Grille();
+    public void initialiserPartie() {
+        Grille GrilleJeu = new Grille();
         GrilleJeu.viderGrille();
-        Random rand = new Random(); 
-        int max1= 5;//maximum de ligne possible + maximum de trou/desintegrateur
-        int max2= 6;//maximum colonne
-        int a = rand.nextInt(max1);//nombre aleatoire de desintegrateur et trou noir a placer
-        for (int b = 0 ; b <= a ; b++) {
-            int i = rand.nextInt(max1); // i comme k sont des indices de lignes, compris entre 0 et 5 
-            int j = rand.nextInt(max2); // j comme l sont des indices de colonnes, compris entre 0 et 6
-            int k = rand.nextInt(max1);
-            int l = rand.nextInt(max2);
-            GrilleJeu.placerTrouNoir(i,j);//placement du trou noir a une place aleatoire dans la grille
-            GrilleJeu.placerDesintegrateur(k,l);//placement du desintegrateur a une place aleatoire dans la grille
+        Random rand = new Random();
+        int max_l = 5;//maximum de ligne possible + maximum de trou/desintegrateur
+        int max_c = 6;//maximum colonne
+
+        for (int b = 0; b <= 5; b++) { // donnera 5 paires de coordonnées aléatoires pour 5 trous noirs et 5 desintégrateurs
+            int i = rand.nextInt(max_l); // i comme k sont des indices de lignes, compris entre 0 et 5 
+            int j = rand.nextInt(max_c); // j comme l sont des indices de colonnes, compris entre 0 et 6
+            int k = rand.nextInt(max_l);
+            int l = rand.nextInt(max_c);
+            int nbr_desinte;
+
+             if (GrilleJeu.placerTrouNoir(i, j) == false) {
+                b--;
+            } // on veut quand même 5 trous noirs donc s'il y en a deja un sur la case (i,j) par hasard, on décrémente b.
+            else {
+                GrilleJeu.placerTrouNoir(i, j);
+                for (nbr_desinte = 5; nbr_desinte > 3; nbr_desinte--) {
+                    GrilleJeu.placerDesintegrateur(i, j);
+                }
+
+            }
+            for (nbr_desinte = 3; nbr_desinte >= 0; nbr_desinte--) {
+                if (GrilleJeu.placerDesintegrateur(k, l) == false) {
+                    b--;
+                } else {
+                    GrilleJeu.placerDesintegrateur(k, l);
+
+                }
+
+            }
+            
         }
- 
-        Jeton jetonJ1=new Jeton(ListeJoueurs[0].couleur);
-        Jeton jetonJ2=new Jeton(ListeJoueurs[1].couleur);
-        jetonJ1.couleur=ListeJoueurs[0].couleur;//attribut couleur jeton joueur 1
-        jetonJ2.couleur=ListeJoueurs[1].couleur;//attribut couleur jeton joueur 2
+
+        Jeton jetonJ1 = new Jeton("R");
+        Jeton jetonJ2 = new Jeton("J");
         ListeJoueurs[0].ajouterJeton(jetonJ1);//ajout des jetons au joueur 1
-        ListeJoueurs[0].nombreJetonsRestant=21;
+        ListeJoueurs[0].nombreJetonsRestant = 21;
         ListeJoueurs[1].ajouterJeton(jetonJ2);//ajout des jetons au joueur 2
-        ListeJoueurs[1].nombreJetonsRestant=21;
-        
-        
-}
+        ListeJoueurs[1].nombreJetonsRestant = 21;
+
+    }
     public void debuterPartie() {
         Scanner sc= new Scanner (System.in);        
         initialiserPartie();
@@ -75,6 +92,7 @@ public class Partie {
                 
                 if (col>=0 && col<=6 && GrilleJeu.colonneRemplie(col)==false){ // test de la saisie et de la colonne
                     GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col);
+                    System.out.println("ListeJetons[0] : "+joueurCourant.ListeJetons[0]);
                     joueurCourant.nombreJetonsRestant-=1;
                     System.out.println("nombre jetons restants pour "+ joueurCourant.nom +": "+ joueurCourant.nombreJetonsRestant);
                 }
