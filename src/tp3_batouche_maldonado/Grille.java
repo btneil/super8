@@ -77,7 +77,7 @@ public class Grille {
                     }
                 }
                 
-                else {
+                else if (Grille[i][j].presenceTrouNoir()==true){
                     System.out.print("T"); // presence des trous noir comme condition à l'affichage
 
                 }

@@ -32,32 +32,73 @@ public class Partie {
         int max_l = 5;//maximum de ligne possible + maximum de trou/desintegrateur
         int max_c = 6;//maximum colonne
 
-        for (int b = 0; b <= 5; b++) { // donnera 5 paires de coordonnées aléatoires pour 5 trous noirs et 5 desintégrateurs
+       /* for (int b = 0; b <= 5; b++) { // donnera 5 paires de coordonnées aléatoires pour 5 trous noirs et 5 desintégrateurs
             int i = rand.nextInt(max_l); // i comme k sont des indices de lignes, compris entre 0 et 5 
             int j = rand.nextInt(max_c); // j comme l sont des indices de colonnes, compris entre 0 et 6
             int k = rand.nextInt(max_l);
             int l = rand.nextInt(max_c);
-            int nbr_desinte;
+            int nbr_desinte=5;
+ */
 
-             if (GrilleJeu.placerTrouNoir(i, j) == false) {
-                b--;
-            } // on veut quand même 5 trous noirs donc s'il y en a deja un sur la case (i,j) par hasard, on décrémente b.
-            else {
-                GrilleJeu.placerTrouNoir(i, j);
-                for (nbr_desinte = 5; nbr_desinte > 3; nbr_desinte--) {
-                    GrilleJeu.placerDesintegrateur(i, j);
-                }
-
+       
+        for (int b = 1; b <= 2; b++) { 
+            int i = rand.nextInt(max_l); 
+            int j = rand.nextInt(max_c); 
+            if (GrilleJeu.placerTrouNoir(i, j)==true){
+                System.out.println("bien placé à la ligne" +i +"col : "+j);
             }
-            for (nbr_desinte = 3; nbr_desinte >= 0; nbr_desinte--) {
-                if (GrilleJeu.placerDesintegrateur(k, l) == false) {
+            if (GrilleJeu.placerDesintegrateur(i, j)==true){
+                System.out.println("bien placé à la ligne " +i +"col : "+j);
+        }
+        }
+        for(int b=1; b<=3;b++){
+            int i = rand.nextInt(max_l); 
+            int j = rand.nextInt(max_c); 
+            int k = rand.nextInt(max_l);
+            int l = rand.nextInt(max_c);
+            if (GrilleJeu.placerTrouNoir(i, j)==true){
+                System.out.println("bien placé à la ligne" +i +"col : "+j);
+            }
+            if (GrilleJeu.placerDesintegrateur(k, l)==true){
+                System.out.println("bien placé à la ligne " +k +"col : "+l);
+            }
+       
+       
+       
+       
+       
+            
+            /* while (nbr_desinte>3){
+                if (GrilleJeu.placerTrouNoir(i, j)==false){
+                    System.out.println("Trou noir deja la1");
                     b--;
-                } else {
-                    GrilleJeu.placerDesintegrateur(k, l);
-
                 }
-
+                else  {
+                    GrilleJeu.placerTrouNoir(i,j);
+                    GrilleJeu.placerDesintegrateur(i,j);
+                    System.out.println("Test2");
+                    nbr_desinte--;
+                    
+                }
+                
+                
             }
+            while (nbr_desinte>0){
+                if(GrilleJeu.placerDesintegrateur(k,l)==false){
+                    b--;
+                    System.out.println("desinte ici 3");
+                }
+                else{
+                    GrilleJeu.placerDesintegrateur(k,l);
+                    System.out.println("Test4");
+                    nbr_desinte--;
+                }
+                
+                }*/
+            
+            
+                
+
             
         }
 
@@ -69,6 +110,7 @@ public class Partie {
         ListeJoueurs[1].nombreJetonsRestant = 21;
 
     }
+    
     public void debuterPartie() {
         Scanner sc= new Scanner (System.in);        
         initialiserPartie();
