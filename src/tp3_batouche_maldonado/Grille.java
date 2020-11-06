@@ -27,18 +27,16 @@ public class Grille {
     public boolean ajouterJetonDansColonne(Jeton jetonot, int col) {
         int i = 5;
 
-        while (i>=0 ) {
-            if (Grille[i][col].jetonCourant==null && Grille[i][col].trouNoir==false){ // S'il n'y a pas de trou noir et que le jetonCourant de la cellule est null, on peut ajouter un jeton
+        while (i >= 0) {
+            if (Grille[i][col].jetonCourant == null && Grille[i][col].trouNoir == false) { // S'il n'y a pas de trou noir et que le jetonCourant de la cellule est null, on peut ajouter un jeton
                 Grille[i][col].affecterJeton(jetonot);
                 return true;
             }
-            
+
             i--;
-            
+
         }
         return false;
-        
-
 
     }
 
@@ -51,7 +49,7 @@ public class Grille {
 
             }
         }
-        return true; 
+        return true;
     }
 
     public void viderGrille() {
@@ -64,9 +62,21 @@ public class Grille {
     }
 
     public void afficherGrilleSurConsole() {
-       
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j <= 6; j++) {
+                if (Grille[i][j].presenceTrouNoir() == true) {
+                    System.out.print("T");
+                } else if (Grille[i][j].presenceDesintegrateur() == true) {
+                    System.out.print("D");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print("\n");
+        }
+        /* for (int i = 0; i <= 5; i++) {
+            for (int j = 0; j <= 6; j++) {
+
                 if (Grille[i][j].presenceTrouNoir() == false) {
                     if (Grille[i][j].jetonCourant!=null){
                         
@@ -77,16 +87,15 @@ public class Grille {
                     }
                 }
                 
-                else if (Grille[i][j].presenceTrouNoir()==true){
+                else {
                     System.out.print("T"); // presence des trous noir comme condition à l'affichage
 
                 }
             }
             System.out.print("\n");
-        }
+        }*/
 
-        }
-    
+    }
 
     public boolean celluleOccupee(int i, int j) {
         if (Grille[i][j].jetonCourant != null) {
@@ -130,9 +139,7 @@ public class Grille {
 
         return false;
     }
-
-// POTENTIEL PROBLEME sur les DIAG Montantes et Descendantes : 
-    
+  
     public boolean GagnanteDiagMont(Joueur joueur) {
         for (int i = 3; i <= 5; i++) {
             for (int j = 0; j <= 3; j++) {
@@ -150,7 +157,7 @@ public class Grille {
     public boolean GagnanteDiagDesc(Joueur joueur) {
         for (int i = 0; i <= 2; i++) {
             for (int j = 0; j <= 3; j++) {
-                if (Grille[i][j].jetonCourant != null && Grille[i + 1][j + 1].jetonCourant != null && Grille[i + 2][j + 2].jetonCourant != null && Grille[i+3][j + 3].jetonCourant != null) {
+                if (Grille[i][j].jetonCourant != null && Grille[i + 1][j + 1].jetonCourant != null && Grille[i + 2][j + 2].jetonCourant != null && Grille[i + 3][j + 3].jetonCourant != null) {
                     if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i + 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i + 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {
                         return true;
                     }
@@ -181,18 +188,17 @@ public class Grille {
 
     public boolean colonneRemplie(int col) {
         // on cherche a regarder si pour la ligne la plus elevée du jeu (ici i=0), les colonnes j de 0 à 6 inclus sont remplis donc : 
-        int i=0; // la ligne tout au dessus doit être vide pour que la colonne puisse accepter un nouveau jeton.
-        if (Grille[i][col].jetonCourant==null){
+        int i = 0; // la ligne tout au dessus doit être vide pour que la colonne puisse accepter un nouveau jeton.
+        if (Grille[i][col].jetonCourant == null) {
             return false;
-        }else{
+        } else {
             return true;
         }
-        
+
     }
 
     public boolean placerTrouNoir(int i, int j) {
-       return Grille[i][j].placerTrouNoir();
-
+        return Grille[i][j].placerTrouNoir();
 
     }
 

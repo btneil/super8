@@ -27,6 +27,8 @@ public class TP3_BATOUCHE_MALDONADO {
         Joueur J2 = new Joueur(nom2);
                 
         Partie Newpartie = new Partie(J1,J2);
+
+
         Newpartie.debuterPartie();
     }
     
