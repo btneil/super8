@@ -76,6 +76,7 @@ public class Partie {
                 if (col>=0 && col<=6 && GrilleJeu.colonneRemplie(col)==false){ // test de la saisie et de la colonne
                     GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col);
                     joueurCourant.nombreJetonsRestant-=1;
+                    System.out.println("nombre jetons restants pour "+ joueurCourant.nom +": "+ joueurCourant.nombreJetonsRestant);
                 }
                 else if (col<0 || col>6){
                     System.out.println("erreur saisie : au joueur suivant !");

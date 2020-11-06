@@ -117,7 +117,7 @@ public class Grille {
     }
 
     public boolean GagnanteColonne(Joueur joueur) {
-        for (int i = 2; i <= 5; i++) {
+        for (int i = 0; i <= 2; i++) {
             for (int j = 0; j <= 6; j++) {
                 if (Grille[i][j].jetonCourant != null && Grille[i + 1][j].jetonCourant != null && Grille[i + 2][j].jetonCourant != null && Grille[i + 3][j].jetonCourant != null) {
                     if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 1][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 2][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 3][j].lireCouleurDuJeton() == joueur.couleur) {
@@ -133,10 +133,10 @@ public class Grille {
 // POTENTIEL PROBLEME sur les DIAG Montantes et Descendantes : 
     
     public boolean GagnanteDiagMont(Joueur joueur) {
-        for (int i = 0; i <= 2; i++) {
+        for (int i = 3; i <= 5; i++) {
             for (int j = 0; j <= 3; j++) {
-                if (Grille[i][j].jetonCourant != null && Grille[i + 1][j + 1].jetonCourant != null && Grille[i + 2][j + 2].jetonCourant != null && Grille[i + 3][j + 3].jetonCourant != null) {
-                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i + 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i + 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {
+                if (Grille[i][j].jetonCourant != null && Grille[i - 1][j + 1].jetonCourant != null && Grille[i - 2][j + 2].jetonCourant != null && Grille[i - 3][j + 3].jetonCourant != null) {
+                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i - 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i - 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i - 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {
                         return true;
                     }
                 }
@@ -147,10 +147,10 @@ public class Grille {
     }
 
     public boolean GagnanteDiagDesc(Joueur joueur) {
-        for (int i = 5; i >= 3; i--) {
+        for (int i = 0; i <= 2; i--) {
             for (int j = 0; j <= 3; j++) {
-                if (Grille[i][j].jetonCourant != null && Grille[i - 1][j + 1].jetonCourant != null && Grille[i - 2][j + 2].jetonCourant != null && Grille[i][j + 3].jetonCourant != null) {
-                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i - 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i - 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i - 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {
+                if (Grille[i][j].jetonCourant != null && Grille[i + 1][j + 1].jetonCourant != null && Grille[i + 2][j + 2].jetonCourant != null && Grille[i+3][j + 3].jetonCourant != null) {
+                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i + 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i + 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {
                         return true;
                     }
                 }

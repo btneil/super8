@@ -20,7 +20,7 @@ public class Cellule {
         desintegrateur = false;
         }
     public boolean affecterJeton(Jeton jetenot){
-        if (jetonCourant != null) {//jetoncourant n'est pas affecter
+        if (jetonCourant == null) {//jetoncourant n'est pas affecter
             jetonCourant=jetenot;
             return(true);
         }
