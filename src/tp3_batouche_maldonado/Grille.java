@@ -32,6 +32,11 @@ public class Grille {
                 Grille[i][col].affecterJeton(jetonot);
                 return true;
             }
+            else if (Grille[i][col].jetonCourant==null && Grille[i][col].trouNoir==true){ // s'il y a un trou noir, le jeton ne se positionne pas.
+                Grille[i][col].trouNoir=false; // on enleve egalement le trou noir
+                System.out.println("Jeton perdu");
+                return true;
+            }
 
             i--;
 
