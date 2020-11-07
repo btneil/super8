@@ -52,22 +52,22 @@ public class Partie {
         int max_l = 5;//maximum de ligne possible + maximum de trou/desintegrateur
         int max_c = 6;//maximum colonne
 
-      /*  for (int b = 1; b <= 2; b++) {
+        for (int b = 1; b <= 2; b++) { // on place 2 trous noirs au même endroit que 2 desintégrateurs
             int i = rand.nextInt(max_l);//ligne aleatoire
             int j = rand.nextInt(max_c);//colonne aleatoire
-            GrilleJeu.placerTrouNoir(i, j);//placement d'un trou noir a la place i j
+            GrilleJeu.placerTrouNoir(i, j);//placement d'un trou noir a la place (i,j) tiré au hasard
             GrilleJeu.placerDesintegrateur(i, j);//placement desintegrateur a la meme place que le trou noir
         }
 
-        for (int b = 1; b <= 3; b++) {
-            int i = rand.nextInt(max_l);//ligne aleatoire
-            int j = rand.nextInt(max_c);//colonne aleatoire
+        for (int b = 1; b <= 3; b++) { // on complete le nombre de trous noirs (3) et de désintégrateurs (3).  
+            int i = rand.nextInt(max_l);
+            int j = rand.nextInt(max_c);
             int k = rand.nextInt(max_l);//ligne aleatoire
             int l = rand.nextInt(max_c);//colonne aleatoire
-            GrilleJeu.placerTrouNoir(i, j);//placement d'un trou noir a la place i j
-            GrilleJeu.placerDesintegrateur(k, l);//placement desintegrateur a une place differente que celle du trou noir
+            GrilleJeu.placerTrouNoir(i, j);//placement d'un trou noir a la place (i,j) tiré au hasard
+            GrilleJeu.placerDesintegrateur(k, l);//placement desintegrateur a une place differente que celle du trou noir, (k,l)
 
-        }*/
+        }
 
         Jeton jetonJ1 = new Jeton(ListeJoueurs[0].couleur);
         Jeton jetonJ2 = new Jeton(ListeJoueurs[1].couleur);
@@ -80,17 +80,17 @@ public class Partie {
 
     public void debuterPartie() {
         // Tirage aléatoire pour savoir qui commence la partie : 1 correspond à la couleur R et 2 correspond à la couleur J : 
-        
+
         attribuerCouleursAuxJoueurs();
-        int couleur = (rand.nextInt(1)*2)+1;
-        if (couleur==1){
+        int couleur = (rand.nextInt(1) * 2) + 1;
+        if (couleur == 1) {
             System.out.println("Couleur tirée : R ");
-        }else{
+        } else {
             System.out.println("Couleur tirée : J ");
 
         }
         switch (couleur) { // tirage au sort du joueur débutant la partie 
-            case 1: 
+            case 1:
                 if (ListeJoueurs[0].couleur == "J") {
                     joueurCourant = ListeJoueurs[1];
                 } else {
@@ -106,36 +106,60 @@ public class Partie {
 
                 }
                 break;
-        } 
-        
-        
-        
+        }
+
         Scanner sc = new Scanner(System.in);
         initialiserPartie();
-        
+
         System.out.println("la partie va commencer");
         while (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[0]) == false && GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[1]) == false && GrilleJeu.etreRemplie() == false) {
             GrilleJeu.afficherGrilleSurConsole();
 
             boolean i = true; // permet de ne laisser jouer qu'une seule fois chaque joueur.
             while (joueurCourant.nombreJetonsRestant != 0 && i == true) {
-                System.out.println("c'est au tour de : " + joueurCourant.nom);
-                System.out.println("Saisissez la colonne où mettre le jeton (entre 1 et 7) : ");//j'ai changer la colonne en ligne pour etre en raccord avec la v1.0
-                int saisie = sc.nextInt(); // la saisie se fait entre 1 et 7
-                int col = saisie - 1; // pour le code Java, les numéros de colonne commencent à 0.
+                System.out.println("c'est au tour de : " + joueurCourant.nom
+                        + "\n"
+                        + "Souhaitez vous : "
+                        + "\n"
+                        + "1) jouer un de vos jetons "
+                        + "\n"
+                        + "2) recuperer un jeton "
+                        + "\n"
+                        + "Saisissez 1 ou 2 : ");
+                int rep = sc.nextInt();
+                if (rep == 1) {
 
-                if (col >= 0 && col <= 6 && GrilleJeu.colonneRemplie(col) == false) { // test de la saisie et de la colonne
-                    GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col);
-                    //System.out.println("ListeJetons[0] : " + joueurCourant.ListeJetons[0]);
-                    joueurCourant.nombreJetonsRestant -= 1;
-                    System.out.println("nombre jetons restants pour " + joueurCourant.nom + ": " + joueurCourant.nombreJetonsRestant);
-                } else if (col < 0 || col > 6) {
-                    System.out.println("erreur saisie : au joueur suivant !");
-                } else if (GrilleJeu.colonneRemplie(col) == true) {
-                    System.out.println("colonne " + col + " remplie");
+                    System.out.println("Saisissez la colonne où mettre le jeton (entre 1 et 7) : ");//j'ai changer la colonne en ligne pour etre en raccord avec la v1.0
+
+                    int saisie = sc.nextInt(); // la saisie se fait entre 1 et 7
+                    int col = saisie - 1; // pour Java, les numéros de colonne commencent à 0.
+
+                    if (col >= 0 && col <= 6 && GrilleJeu.colonneRemplie(col) == false) { // test de la saisie et de la colonne
+
+//                    GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col);
+                        if (GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col) == true) { // si on ajoute un jeton sur un trou noir, le trou noir disparait et on perd un jeton
+                            joueurCourant.nombreJetonsRestant -= 1;
+                        }
+                        System.out.println("nombre jetons restants pour " + joueurCourant.nom + ": " + joueurCourant.nombreJetonsRestant);
+                    } else if (col < 0 || col > 6) {
+                        System.out.println("erreur saisie : au joueur suivant !");
+                    } else if (GrilleJeu.colonneRemplie(col) == true) {
+                        System.out.println("colonne " + col + " remplie");
+                    }
+
+                    i = false;
+                } else if (rep == 2) {
+                    System.out.println("Saisissez la ligne i puis la colonne j du jeton a récupérer "
+                            + "\n"
+                            + "Rq : en bas à gauche correspond à la ligne 6 colonne 0. "
+                            + "\n"
+                            + "Saisissez votre choix : ");
+                    int l = sc.nextInt();
+                    int j = sc.nextInt();
+                    GrilleJeu.recupererJeton(l, j);
+                    joueurCourant.nombreJetonsRestant += 1;
+
                 }
-
-                i = false;
             }
             if (joueurCourant == ListeJoueurs[1]) { // a chaque tour de jeu, joueurCourant change et permet de jouer chacun son tour
                 joueurCourant = ListeJoueurs[0];
@@ -147,11 +171,10 @@ public class Partie {
             }
 
         }
-        if (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[0])==true){
-            System.out.println("Joueur gagant :" +ListeJoueurs[0].nom);
-        }
-        else if (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[1])==true){
-            System.out.println("Joueur gagant :" +ListeJoueurs[1].nom);
+        if (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[0]) == true) {
+            System.out.println("Joueur gagant :" + ListeJoueurs[0].nom);
+        } else if (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[1]) == true) {
+            System.out.println("Joueur gagant :" + ListeJoueurs[1].nom);
         }
     }
 }
