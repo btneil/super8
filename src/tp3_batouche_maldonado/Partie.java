@@ -29,7 +29,15 @@ public class Partie {
     }
 
     public void initialiserPartie() {
+        
+        // [BD] : l'erreur est la : 
+        // en REcréant grilleJeu DANS initialiserPArtie, ce n'est pas la meme que la grilleJeu de la ligne 19
+        // [BD] - 1 Il faut supprimer la ligne ci dessus, car la grille est déjà créée plus haut
+        // sinon vous créez uen seconde grille juste le temps de placer les trous noirs
+        
+       
         Grille GrilleJeu = new Grille();
+        
         GrilleJeu.viderGrille();
         Random rand = new Random();
         int max_l = 5;//maximum de ligne possible + maximum de trou/desintegrateur
@@ -39,6 +47,8 @@ public class Partie {
             int i = rand.nextInt(max_l);
             int j = rand.nextInt(max_c);
             GrilleJeu.placerTrouNoir(i, j);
+           
+       
             if (GrilleJeu.Grille[i][j].presenceTrouNoir() == true) {
 
                 System.out.println("test :" + GrilleJeu.Grille[i][j].trouNoir+ "T bien placé à la ligne" + i + "col : " + j);
