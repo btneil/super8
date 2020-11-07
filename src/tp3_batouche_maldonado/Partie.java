@@ -35,8 +35,6 @@ public class Partie {
         // [BD] - 1 Il faut supprimer la ligne ci dessus, car la grille est déjà créée plus haut
         // sinon vous créez uen seconde grille juste le temps de placer les trous noirs
         
-       
-        Grille GrilleJeu = new Grille();
         
         GrilleJeu.viderGrille();
         Random rand = new Random();
@@ -44,37 +42,23 @@ public class Partie {
         int max_c = 6;//maximum colonne
 
         for (int b = 1; b <= 2; b++) {
-            int i = rand.nextInt(max_l);
-            int j = rand.nextInt(max_c);
-            GrilleJeu.placerTrouNoir(i, j);
-           
-       
-            if (GrilleJeu.Grille[i][j].presenceTrouNoir() == true) {
-
-                System.out.println("test :" + GrilleJeu.Grille[i][j].trouNoir+ "T bien placé à la ligne" + i + "col : " + j);
-            }
-            GrilleJeu.placerDesintegrateur(i, j);
-            if (GrilleJeu.Grille[i][j].presenceDesintegrateur() == true) {
-                System.out.println("D bien placé à la ligne " + i + "col : " + j);
-            }
-            
+            int i = rand.nextInt(max_l);//ligne aleatoire
+            int j = rand.nextInt(max_c);//colonne aleatoire
+            GrilleJeu.placerTrouNoir(i, j);//placement d'un trou noir a la place i j
+            GrilleJeu.placerDesintegrateur(i, j);//placement desintegrateur a la meme place que le trou noir
         }
-        GrilleJeu.placerDesintegrateur(2, 6);
+
 
         
-       /* for (int b = 1; b <= 3; b++) {
-            int i = rand.nextInt(max_l);
-            int j = rand.nextInt(max_c);
-            int k = rand.nextInt(max_l);
-            int l = rand.nextInt(max_c);
-            if (GrilleJeu.placerTrouNoir(i, j) == true) {
-                System.out.println("T bien placé à la ligne" + i + "col : " + j);
-            }
-            if (GrilleJeu.placerDesintegrateur(k, l) == true) {
-                System.out.println("D bien placé à la ligne " + k + "col : " + l);
-            }
+        for (int b = 1; b <= 3; b++) {
+            int i = rand.nextInt(max_l);//ligne aleatoire
+            int j = rand.nextInt(max_c);//colonne aleatoire
+            int k = rand.nextInt(max_l);//ligne aleatoire
+            int l = rand.nextInt(max_c);//colonne aleatoire
+            GrilleJeu.placerTrouNoir(i, j);//placement d'un trou noir a la place i j
+            GrilleJeu.placerDesintegrateur(k, l);//placement desintegrateur a une place differente que celle du trou noir
 
-        } */
+        } 
 
         Jeton jetonJ1 = new Jeton("R");
         Jeton jetonJ2 = new Jeton("J");
@@ -97,22 +81,28 @@ public class Partie {
             } else {
                 joueurCourant = ListeJoueurs[1];
             }
-
+            if (joueurCourant.nombreJetonsRestant==0){
+                
+            }
             boolean i = true; // permet de ne laisser jouer qu'une seule fois chaque joueur.
             while (joueurCourant.nombreJetonsRestant != 0 && i == true) {
                 System.out.println("c'est au tour de : " + joueurCourant.nom);
-                System.out.println("Saisissez la colonne où mettre le jeton : ");
+                System.out.println("Saisissez la colonne où mettre le jeton : ");//j'ai changer la colonne en ligne pour etre en raccord avec la v1.0
                 int col = sc.nextInt();
 
                 if (col >= 0 && col <= 6 && GrilleJeu.colonneRemplie(col) == false) { // test de la saisie et de la colonne
                     GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col);
-                    System.out.println("ListeJetons[0] : " + joueurCourant.ListeJetons[0]);
+                    //System.out.println("ListeJetons[0] : " + joueurCourant.ListeJetons[0]);
                     joueurCourant.nombreJetonsRestant -= 1;
                     System.out.println("nombre jetons restants pour " + joueurCourant.nom + ": " + joueurCourant.nombreJetonsRestant);
                 } else if (col < 0 || col > 6) {
                     System.out.println("erreur saisie : au joueur suivant !");
                 }
-                i = false;
+                if (GrilleJeu.colonneRemplie(col)==true){
+                    System.out.println("colonne " + col + " remplie");
+                }
+                
+            i = false;
             }
 
         }
