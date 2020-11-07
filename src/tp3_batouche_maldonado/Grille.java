@@ -69,7 +69,13 @@ public class Grille {
                 } else if (Grille[i][j].presenceDesintegrateur() == true) {
                     System.out.print("D");
                 } else {
+                    // BD : ajout de l'affichage des jetons 
+                    if (Grille[i][j].jetonCourant==null) {
                     System.out.print(" ");
+                    }
+                    else {
+                         System.out.print(Grille[i][j].jetonCourant.couleur);
+                    }
                 }
             }
             System.out.print("\n");
