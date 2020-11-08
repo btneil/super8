@@ -73,12 +73,15 @@ public class Partie {
         Jeton jetonJ2 = new Jeton(ListeJoueurs[1].couleur);
         ListeJoueurs[0].ajouterJeton(jetonJ1);//ajout des jetons au joueur 1
         ListeJoueurs[0].nombreJetonsRestant = 21;
-        ListeJoueurs[1].ajouterJeton(jetonJ2);//ajout des jetons au joueur 2
+        ListeJoueurs[1].ajouterJeton(jetonJ2);
         ListeJoueurs[1].nombreJetonsRestant = 21;
+        ListeJoueurs[0].nombreDesintegrateurs=1; // initialisation du nombre de désintégrateurs de chaque joueur
+        ListeJoueurs[1].nombreDesintegrateurs=1;
 
     }
 
     public void debuterPartie() {
+        
         // Tirage aléatoire pour savoir qui commence la partie : 1 correspond à la couleur R et 2 correspond à la couleur J : 
 
         attribuerCouleursAuxJoueurs();
@@ -114,6 +117,7 @@ public class Partie {
         System.out.println("la partie va commencer");
         while (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[0]) == false && GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[1]) == false && GrilleJeu.etreRemplie() == false) {
             GrilleJeu.afficherGrilleSurConsole();
+            
 
             boolean i = true; // permet de ne laisser jouer qu'une seule fois chaque joueur.
             while (joueurCourant.nombreJetonsRestant != 0 && i == true) {
@@ -125,12 +129,12 @@ public class Partie {
                         + "\n"
                         + "2) recuperer un jeton "
                         + "\n"
-                        + "3) desintegrer un jeton"       
+                        + "3) desintegrer un jeton"
                         + "\n"
                         + "Saisissez 1, 2, 3 : ");
                 int rep = sc.nextInt();
                 if (rep == 1) {
-
+                    GrilleJeu.afficherGrilleSurConsole();
                     System.out.println("Saisissez la colonne où mettre le jeton (entre 1 et 7) : ");
 
                     int saisie = sc.nextInt(); // la saisie se fait entre 1 et 7
@@ -138,58 +142,77 @@ public class Partie {
 
                     if (col >= 0 && col <= 6 && GrilleJeu.colonneRemplie(col) == false) { // test de la saisie et de la colonne
 
-                        //on ne devrait pas utiliser ActiverTrouNoir pour utiliser un trou noir ?
                         if (GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col) == true) { // si on ajoute un jeton sur un trou noir, le trou noir disparait et on perd un jeton
                             joueurCourant.nombreJetonsRestant -= 1;
                         }
-                        
-                        if (GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col)==true){
+
+                       /* if (GrilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[0], col) == true) {
                             System.out.println("Vous avez gagné un desintegrateur");
-                            joueurCourant.nombreDesintegrateurs+=1;
-                            joueurCourant.nombreJetonsRestant-=1;
-                        }
+                            joueurCourant.nombreDesintegrateurs += 1;
+                            joueurCourant.nombreJetonsRestant -= 1;
+                        } */
                         System.out.println("nombre jetons restants pour " + joueurCourant.nom + ": " + joueurCourant.nombreJetonsRestant);
                     } else if (col < 0 || col > 6) {
                         System.out.println("erreur saisie : au joueur suivant !");
-                    }
-                      else if (GrilleJeu.colonneRemplie(col) == true) {
-                        System.out.println("colonne " + (col+1) + " remplie");
+                    } else if (GrilleJeu.colonneRemplie(col) == true) {
+                        System.out.println("colonne " + (col + 1) + " remplie");
                     }
 
                     i = false;
-                } else if (rep == 2) {
+                } else if (rep == 2 ) {
                     System.out.println("Saisissez la ligne i puis la colonne j du jeton a récupérer "
                             + "\n"
-                            + "Rq : en bas à gauche cela correspond à la ligne 6 colonne 0. "
+                            + "Rq : en bas à gauche cela correspond à la ligne 6 colonne 1. "
                             + "\n"
                             + "Saisissez votre choix : ");
-                    int l = sc.nextInt();
-                    int j = sc.nextInt();
-                    if (GrilleJeu.celluleOccupee(l, j)==false){
+                    int ligne = sc.nextInt();
+                    int l = ligne - 1;
+                    int colonne = sc.nextInt();
+                    int j = colonne - 1;
+                    if (GrilleJeu.celluleOccupee(l, j) == false) {
                         System.out.println("Oups, il n'y a pas de jeton dans cette cellule");
-                    }
-                    else{
-                         GrilleJeu.recupererJeton(l, j);
-                    joueurCourant.nombreJetonsRestant += 1;
-                    }
-                    
-                 
-                }
-                else if (rep==3){
-                    System.out.println("Saisissez la ligne i puis la colonne j du jeton que vous souhaitez désintegrer"
-                            + "\n"
-                            + "n'oubliez pas que en bas à gauche cela correspond à la ligne 6 colonne 0"
-                            + "\n"
-                            + "Saisissez votre choix : ");
-                    int b=sc.nextInt();
-                    int c=sc.nextInt();
-                    if (joueurCourant.nombreDesintegrateurs==0){
-                        System.out.println("Oups, vous n'avez pas de desintegrateur !");
+                    } else if(GrilleJeu.lireCouleurDuJeton(l, j)==joueurCourant.couleur) {
+                        GrilleJeu.recupererJeton(l, j);
+                        joueurCourant.nombreJetonsRestant += 1;
                     }
                     else {
-                        joueurCourant.utiliserDesintegrateur();
-                        GrilleJeu.supprimerJeton(b,c);
+                        System.out.println("Vous ne pouvez récuperer qu'un de vos jetons!");
                     }
+                    i=false;
+
+                }
+                
+                    else if (rep == 3) {
+                    GrilleJeu.afficherGrilleSurConsole();
+                    System.out.println("Saisissez la ligne i puis la colonne j du jeton que vous souhaitez désintegrer"
+                            + "\n"
+                            + "n'oubliez pas que en bas à gauche cela correspond à la ligne 6 colonne 1"
+                            + "\n"
+                            + "Saisissez votre choix : ");
+                    
+                    int ligne = sc.nextInt();
+                    int l = ligne - 1;
+                    int colonne = sc.nextInt();
+                    int j = colonne - 1;
+                    if (joueurCourant.nombreDesintegrateurs != 0){
+                        if (GrilleJeu.celluleOccupee(l,j)==true && GrilleJeu.Grille[l][j].lireCouleurDuJeton()!=joueurCourant.couleur   ){
+                            
+                            joueurCourant.utiliserDesintegrateur();
+                            GrilleJeu.supprimerJeton(l,j);
+                            GrilleJeu.tasserGrille(j);
+                            
+                            }
+                        else if (GrilleJeu.celluleOccupee(l,j)==false){ 
+                            System.out.println("Il n'y a pas de jetons dans cette cellule");
+                        }
+                        else if (GrilleJeu.Grille[l][j].lireCouleurDuJeton()==joueurCourant.couleur){
+                            System.out.println("Vous ne pouvez pas désintégrer un de vos jetons! ");
+                        }
+                        
+                    } else  {
+                        System.out.println("Vous n'avez pas de désintégrateurs, gagnez en un sur la Grille de jeu");
+                    }
+                    i=false;
                 }
             }
             if (joueurCourant == ListeJoueurs[1]) { // a chaque tour de jeu, joueurCourant change et permet de jouer chacun son tour
@@ -206,6 +229,9 @@ public class Partie {
             System.out.println("Joueur gagant :" + ListeJoueurs[0].nom);
         } else if (GrilleJeu.etreGagnantePourJoueur(ListeJoueurs[1]) == true) {
             System.out.println("Joueur gagant :" + ListeJoueurs[1].nom);
+        }
+        else {
+            System.out.println("error");
         }
     }
 }
