@@ -1,8 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* 
+
+TP3 - PUISSANCE 4
+MALDONADO Alexis et BATOUCHE Neil 
+Sans interface graphique
+
+*/
 package tp3_batouche_maldonado;
 
 import java.util.Random;

@@ -1,8 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* 
+
+TP3 - PUISSANCE 4
+MALDONADO Alexis et BATOUCHE Neil 
+Sans interface graphique
+
+*/
+
 package tp3_batouche_maldonado;
 
 import java.util.Scanner;
@@ -21,10 +24,10 @@ public class TP3_BATOUCHE_MALDONADO {
         sc = new Scanner(System.in);
         System.out.println("Saisir nom joueur 1");
         String nom1 = sc.next();
-        Joueur J1 = new Joueur(nom1);//creation d'un nouveau joueur
+        Joueur J1 = new Joueur(nom1);//creation d'un  joueur J1
         System.out.println("Saisir nom joueur 2");
         String nom2=sc.next();
-        Joueur J2 = new Joueur(nom2);//creation d'un nouveau joueur
+        Joueur J2 = new Joueur(nom2);//creation d'un  joueur J2
                 
         Partie Newpartie = new Partie(J1,J2);//creation d'une nouvelle partie
 
