@@ -10,13 +10,15 @@ package tp3_batouche_maldonado;
  * @author maldo
  */
 public class Jeton {
-    String couleur; 
+
+    String couleur;
 
     public Jeton(String couleurJeton) {
-        couleur=couleurJeton;
+        couleur = couleurJeton;
     }
-    public String lireCouleur(){
-        return(couleur);
+
+    public String lireCouleur() {
+        return (couleur);
 
     }
 }

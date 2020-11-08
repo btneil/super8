@@ -28,18 +28,18 @@ public class Grille {
         int i = 5;
 
         while (i >= 0) {
-            if (Grille[i][col].jetonCourant == null){// && Grille[i][col].trouNoir == false) { // S'il n'y a pas de trou noir et que le jetonCourant de la cellule est null, on peut ajouter un jeton
+            if (Grille[i][col].jetonCourant == null) {// && Grille[i][col].trouNoir == false) { // S'il n'y a pas de trou noir et que le jetonCourant de la cellule est null, on peut ajouter un jeton
                 Grille[i][col].affecterJeton(jetonot);
-                
-                if (Grille[i][col].presenceTrouNoir()==true){
-                    return(Grille[i][col].activerTrouNoir());
-                    
+
+                if (Grille[i][col].presenceTrouNoir() == true) {
+                    return (Grille[i][col].activerTrouNoir());
+
                 }
+
                 return true;
 
-                
             }
-           
+
             i--;
         }
         return false;
@@ -75,11 +75,10 @@ public class Grille {
                     System.out.print("D");
                 } else {
                     // BD : ajout de l'affichage des jetons 
-                    if (Grille[i][j].jetonCourant==null) {
-                    System.out.print(" ");
-                    }
-                    else {
-                         System.out.print(Grille[i][j].jetonCourant.couleur);
+                    if (Grille[i][j].jetonCourant == null) {
+                        System.out.print(" ");
+                    } else {
+                        System.out.print(Grille[i][j].jetonCourant.couleur);
                     }
                 }
             }
@@ -129,7 +128,7 @@ public class Grille {
 
         return false;
     }
-  
+
     public boolean GagnanteDiagMont(Joueur joueur) {
         for (int i = 3; i <= 5; i++) {
             for (int j = 0; j <= 3; j++) {
@@ -171,7 +170,7 @@ public class Grille {
 
             if (Grille[i][liberee].jetonCourant == null) {
                 Grille[i][liberee].jetonCourant = Grille[i - 1][liberee].jetonCourant;
-                Grille[i-1][liberee].jetonCourant=null;
+                Grille[i - 1][liberee].jetonCourant = null;
             }
         }
 
@@ -180,17 +179,16 @@ public class Grille {
     public boolean colonneRemplie(int col) {
         // on cherche a regarder si pour la ligne la plus elevée du jeu (ici i=0), les colonnes j de 0 à 6 inclus sont remplis donc : 
         //int i = 0; // la ligne tout au dessus doit être vide pour que la colonne puisse accepter un nouveau jeton.
-        boolean verif=false;
-        if (col>6){//empeche l'entree d'une colonne>6
-            verif=false;
-        }
-        else {
-            if(Grille[0][col].jetonCourant!=null){
-            verif=true;
+        boolean verif = false;
+        if (col > 6) {//empeche l'entree d'une colonne>6
+            verif = false;
+        } else {
+            if (Grille[0][col].jetonCourant != null) {
+                verif = true;
             }
         }
         return verif;
-}
+    }
 
     public boolean placerTrouNoir(int i, int j) {
         return Grille[i][j].placerTrouNoir();
