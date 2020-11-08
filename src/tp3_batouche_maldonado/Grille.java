@@ -28,15 +28,23 @@ public class Grille {
         int i = 5;
 
         while (i >= 0) {
-            if (Grille[i][col].jetonCourant == null && Grille[i][col].trouNoir == false) { // S'il n'y a pas de trou noir et que le jetonCourant de la cellule est null, on peut ajouter un jeton
+            if (Grille[i][col].jetonCourant == null){// && Grille[i][col].trouNoir == false) { // S'il n'y a pas de trou noir et que le jetonCourant de la cellule est null, on peut ajouter un jeton
                 Grille[i][col].affecterJeton(jetonot);
+                if (Grille[i][col].presenceTrouNoir()==true){
+                    Grille[i][col].activerTrouNoir();
+                    return true;
+                }
+                else if (Grille[i][col].presenceDesintegrateur()==true){
+                    Grille[i][col].recupererDesintegrateurs();
+                    return true;
+                 }
                 return true;
             }
-            else if (Grille[i][col].jetonCourant==null && Grille[i][col].trouNoir==true){ // s'il y a un trou noir, le jeton ne se positionne pas.
+            /*else if (Grille[i][col].jetonCourant==null && Grille[i][col].trouNoir==true){ // s'il y a un trou noir, le jeton ne se positionne pas.
                 Grille[i][col].trouNoir=false; // on enleve egalement le trou noir
                 System.out.println("Jeton perdu");
                 return true;
-            }
+            }*/
 
             i--;
 
