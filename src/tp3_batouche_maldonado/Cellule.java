@@ -21,8 +21,8 @@ public class Cellule {
         desintegrateur = false;
     }
 
-    public boolean affecterJeton(Jeton jetenot) {
-        if (jetonCourant == null) {//jetoncourant n'est pas affecter
+    public boolean affecterJeton(Jeton jetenot) {//affecte un jeton a une cellule
+        if (jetonCourant == null) {
             jetonCourant = jetenot;
             return (true);
         } else {
@@ -30,11 +30,11 @@ public class Cellule {
         }
     }
 
-    public Jeton recupererJeton() {
+    public Jeton recupererJeton() {//recupere le jeton de la cellule
         return (jetonCourant);
     }
 
-    public boolean supprimerJeton() {
+    public boolean supprimerJeton() {//supprime le jeton de la cellule
         if (jetonCourant != null) {
             jetonCourant = null;
             return (true);
@@ -43,7 +43,7 @@ public class Cellule {
         }
     }
 
-    public boolean placerTrouNoir() {
+    public boolean placerTrouNoir() {//place un trou noir dans la cellule
         if (trouNoir == false) {
             trouNoir = true;
             return true;
@@ -52,7 +52,7 @@ public class Cellule {
         }
     }
 
-    public boolean placerDesintegrateur() {
+    public boolean placerDesintegrateur() {//place un desintegrateur dans la cellule
         if (desintegrateur == false) {
             desintegrateur = true;
             return (true);
@@ -61,7 +61,7 @@ public class Cellule {
         }
     }
 
-    public boolean presenceTrouNoir() {
+    public boolean presenceTrouNoir() {//regarde si la cellule possede un trou noir
         if (trouNoir == true) {
             return (true);
         } else {
@@ -69,7 +69,7 @@ public class Cellule {
         }
     }
 
-    public boolean presenceDesintegrateur() {
+    public boolean presenceDesintegrateur() {//regarde si la cellule possede un desintegrateur
         if (desintegrateur == true) {
             return (true);
         } else {
@@ -77,12 +77,12 @@ public class Cellule {
         }
     }
 
-    public String lireCouleurDuJeton() {
+    public String lireCouleurDuJeton() {//lit la couleur du jeton dans la cellulle
         return (jetonCourant.lireCouleur());
 
     }
 
-    public boolean recupererDesintegrateurs() {
+    public boolean recupererDesintegrateurs() {//recupere un desintegrateur et le supprime de la cellule
         if (desintegrateur == true) {
             desintegrateur = false;
             return (true);
@@ -91,7 +91,7 @@ public class Cellule {
         }
     }
 
-    public boolean activerTrouNoir() {
+    public boolean activerTrouNoir() {//active le trou noir et le supprime de la cellule
         if (trouNoir == true) {
             jetonCourant = null;
             trouNoir = false;

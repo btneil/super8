@@ -14,7 +14,7 @@ public class Jeton {
     String couleur;
 
     public Jeton(String couleurJeton) {
-        couleur = couleurJeton;
+        couleur = couleurJeton;//initialisation de la couleur du jeton
     }
 
     public String lireCouleur() {

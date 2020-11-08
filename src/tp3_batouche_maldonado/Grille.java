@@ -17,7 +17,7 @@ public class Grille {
     public Grille() {
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j <= 6; j++) {
-                Grille[i][j] = new Cellule();
+                Grille[i][j] = new Cellule();//initialisation de chaque cellule de la grille
 
             }
         }
@@ -28,10 +28,10 @@ public class Grille {
         int i = 5;
 
         while (i >= 0) {
-            if (Grille[i][col].jetonCourant == null) {// && Grille[i][col].trouNoir == false) { // S'il n'y a pas de trou noir et que le jetonCourant de la cellule est null, on peut ajouter un jeton
+            if (Grille[i][col].jetonCourant == null) {// Si le jetonCourant de la cellule est null, on peut ajouter un jeton
                 Grille[i][col].affecterJeton(jetonot);
 
-                if (Grille[i][col].presenceTrouNoir() == true) {
+                if (Grille[i][col].presenceTrouNoir() == true) {//si il y a un trou noir, alors on l'active
                     return (Grille[i][col].activerTrouNoir());
 
                 }
@@ -45,7 +45,7 @@ public class Grille {
         return false;
     }
 
-    public boolean etreRemplie() {
+    public boolean etreRemplie() {//verification du remplissage de la grille
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j <= 6; j++) {
                 if (Grille[i][j].jetonCourant == null) {
@@ -57,7 +57,7 @@ public class Grille {
         return true;
     }
 
-    public void viderGrille() {
+    public void viderGrille() {//permet de vider la grille de tout ce qu'il y avait dedans 
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j <= 6; j++) {
                 Grille[i][j] = new Cellule();
@@ -69,16 +69,15 @@ public class Grille {
     public void afficherGrilleSurConsole() {
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j <= 6; j++) {
-                if (Grille[i][j].presenceTrouNoir() == true) {
+                if (Grille[i][j].presenceTrouNoir() == true) {//affichage des trou noirs
                     System.out.print("T");
-                } else if (Grille[i][j].presenceDesintegrateur() == true) {
+                } else if (Grille[i][j].presenceDesintegrateur() == true) {//afficage des desintegrateur
                     System.out.print("D");
                 } else {
-                    // BD : ajout de l'affichage des jetons 
                     if (Grille[i][j].jetonCourant == null) {
-                        System.out.print(" ");
+                        System.out.print(" ");//affichage des espaces vides
                     } else {
-                        System.out.print(Grille[i][j].jetonCourant.couleur);
+                        System.out.print(Grille[i][j].jetonCourant.couleur);//affichage de la couleur des jetons
                     }
                 }
             }
@@ -86,7 +85,7 @@ public class Grille {
         }
     }
 
-    public boolean celluleOccupee(int i, int j) {
+    public boolean celluleOccupee(int i, int j) {//verification de l'occupation d'une cellule
         if (Grille[i][j].jetonCourant != null) {
             return true;
         } else {
@@ -96,7 +95,7 @@ public class Grille {
     }
 
     public String lireCouleurDuJeton(int i, int j) {
-        return Grille[i][j].lireCouleurDuJeton();
+        return Grille[i][j].lireCouleurDuJeton();//lecture de couleur d'un jeton
     }
 
     public boolean GagnanteLigne(Joueur joueur) {
@@ -119,7 +118,7 @@ public class Grille {
         for (int i = 0; i <= 2; i++) {
             for (int j = 0; j <= 6; j++) {
                 if (Grille[i][j].jetonCourant != null && Grille[i + 1][j].jetonCourant != null && Grille[i + 2][j].jetonCourant != null && Grille[i + 3][j].jetonCourant != null) {
-                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 1][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 2][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 3][j].lireCouleurDuJeton() == joueur.couleur) {
+                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 1][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 2][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 3][j].lireCouleurDuJeton() == joueur.couleur) {//condition de victoire
                         return true;
                     }
                 }
@@ -133,7 +132,7 @@ public class Grille {
         for (int i = 3; i <= 5; i++) {
             for (int j = 0; j <= 3; j++) {
                 if (Grille[i][j].jetonCourant != null && Grille[i - 1][j + 1].jetonCourant != null && Grille[i - 2][j + 2].jetonCourant != null && Grille[i - 3][j + 3].jetonCourant != null) {
-                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i - 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i - 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i - 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {
+                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i - 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i - 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i - 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {//condition de victoire
                         return true;
                     }
                 }
@@ -147,7 +146,7 @@ public class Grille {
         for (int i = 0; i <= 2; i++) {
             for (int j = 0; j <= 3; j++) {
                 if (Grille[i][j].jetonCourant != null && Grille[i + 1][j + 1].jetonCourant != null && Grille[i + 2][j + 2].jetonCourant != null && Grille[i + 3][j + 3].jetonCourant != null) {
-                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i + 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i + 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {
+                    if (Grille[i][j].lireCouleurDuJeton() == joueur.couleur && Grille[i + 1][j + 1].lireCouleurDuJeton() == joueur.couleur && Grille[i + 2][j + 2].lireCouleurDuJeton() == joueur.couleur && Grille[i + 3][j + 3].lireCouleurDuJeton() == joueur.couleur) {//condition de victoire
                         return true;
                     }
                 }
@@ -157,7 +156,7 @@ public class Grille {
     }
 
     public boolean etreGagnantePourJoueur(Joueur joueur) {
-        if (GagnanteColonne(joueur) == true || GagnanteLigne(joueur) == true || GagnanteDiagMont(joueur) == true || GagnanteDiagDesc(joueur) == true) {
+        if (GagnanteColonne(joueur) == true || GagnanteLigne(joueur) == true || GagnanteDiagMont(joueur) == true || GagnanteDiagDesc(joueur) == true) {//condition de victoire
             return true;
         } else {
             return false;
@@ -190,22 +189,22 @@ public class Grille {
         return verif;
     }
 
-    public boolean placerTrouNoir(int i, int j) {
+    public boolean placerTrouNoir(int i, int j) {//place un trou noir
         return Grille[i][j].placerTrouNoir();
 
     }
 
-    public boolean placerDesintegrateur(int i, int j) {
+    public boolean placerDesintegrateur(int i, int j) {//place un desintegrateur
         return Grille[i][j].placerDesintegrateur();
 
     }
 
-    public boolean supprimerJeton(int i, int j) {
+    public boolean supprimerJeton(int i, int j) {//supprime un jeton
         return Grille[i][j].supprimerJeton();
 
     }
 
-    public Jeton recupererJeton(int i, int j) {
+    public Jeton recupererJeton(int i, int j) {//recupere un jeton
         Jeton ref = Grille[i][j].recupererJeton();
         Grille[i][j].supprimerJeton();
         return ref;

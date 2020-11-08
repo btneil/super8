@@ -27,16 +27,16 @@ public class Joueur {//
 
     public void ajouterJeton(Jeton jeton) {
         for (int i = 0; i < ListeJetons.length; i++) {
-            ListeJetons[i] = jeton;//
+            ListeJetons[i] = jeton;//initialisation des jetons 
 
         }
     }
 
     public void obtenirDesintegrateur(int nombreDesinte) {
-        nombreDesintegrateurs = nombreDesinte;
+        nombreDesintegrateurs = nombreDesinte;//permet d'avoir un nombre de desintegrateur
     }
 
-    public boolean utiliserDesintegrateur() {
+    public boolean utiliserDesintegrateur() {//permet d'utiliser les desintegrateurs
         if (nombreDesintegrateurs > 0) {
             nombreDesintegrateurs--;
             return true;

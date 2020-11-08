@@ -21,12 +21,12 @@ public class TP3_BATOUCHE_MALDONADO {
         sc = new Scanner(System.in);
         System.out.println("Saisir nom joueur 1");
         String nom1 = sc.next();
-        Joueur J1 = new Joueur(nom1);
+        Joueur J1 = new Joueur(nom1);//creation d'un nouveau joueur
         System.out.println("Saisir nom joueur 2");
         String nom2=sc.next();
-        Joueur J2 = new Joueur(nom2);
+        Joueur J2 = new Joueur(nom2);//creation d'un nouveau joueur
                 
-        Partie Newpartie = new Partie(J1,J2);
+        Partie Newpartie = new Partie(J1,J2);//creation d'une nouvelle partie
 
 
         Newpartie.debuterPartie();
