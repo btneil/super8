@@ -165,8 +165,14 @@ public class Partie {
                             + "Saisissez votre choix : ");
                     int l = sc.nextInt();
                     int j = sc.nextInt();
-                    GrilleJeu.recupererJeton(l, j);
+                    if (GrilleJeu.celluleOccupee(l, j)==false){
+                        System.out.println("Oups, il n'y a pas de jeton dans cette cellule");
+                    }
+                    else{
+                         GrilleJeu.recupererJeton(l, j);
                     joueurCourant.nombreJetonsRestant += 1;
+                    }
+                    
                  
                 }
                 else if (rep==3){
